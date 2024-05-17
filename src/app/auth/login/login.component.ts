@@ -36,8 +36,7 @@ export default class LoginComponent {
         password: form.password ?? ''
       })
       if (error) throw error;
-      console.log(data);
-      //this.router.navigate()
+      this.router.navigateByUrl('/hotels');
 
     }catch (eror) {
       if (eror instanceof  Error) {

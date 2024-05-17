@@ -9,6 +9,9 @@ export class AuthService {
   private _supabaClient = inject(SupabaseService).supabaseClient
   constructor() { }
 
+  session() {
+    this._supabaClient.auth.getSession();
+  }
   signUp(credentials: SignUpWithPasswordCredentials) {
     return this._supabaClient.auth.signUp(credentials);
   }
