@@ -13,7 +13,16 @@
          Nombre
         </th>
         <th scope="col" class="px-6 py-3">
-          Reservado
+          Dirección
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Ciudad
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Contacto
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Página web
         </th>
         <th scope="col" class="px-6 py-3">
           Estado
@@ -24,34 +33,45 @@
       </tr>
       </thead>
       <tbody>
-      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-          Apple MacBook Pro 17"
-        </th>
-        <td class="px-6 py-4">
-          Silver
-        </td>
-        <td class="px-6 py-4">
-          Laptop
-        </td>
-        <td class="px-6 py-4 text-right">
-          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-        </td>
-      </tr>
-      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
-        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
-          Microsoft Surface Pro
-        </th>
-        <td class="px-6 py-4">
-          White
-        </td>
-        <td class="px-6 py-4">
-          Laptop PC
-        </td>
-        <td class="px-6 py-4 text-right">
-          <a href="#" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
-        </td>
-      </tr>
+      @if(hotelsService.loading()) {
+        <tr class="bg-whire border-b dark:bg-gray-800 dark:border-gray-700">
+          <td colspan="4" class="px-6 py-4">
+            <p class="text-center">loading...</p>
+          </td>
+        </tr>
+      }
+      @if(!hotelsService.loading() && !hotelsService.error()) {
+        @for(hotel of hotelsService.hotels(); track hotel) {
+          <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+              {{hotel.name}}
+            </th>
+            <td class="px-6 py-4">
+              {{hotel.city}}
+            </td>
+            <td class="px-6 py-4">
+              {{hotel.address}}
+            </td>
+            <td class="px-6 py-4">
+              {{hotel.contact}}
+            </td>
+            <td class="px-6 py-4">
+              {{hotel.web}}
+            </td>
+            <td class="px-6 py-4">
+              {{hotel.state ? 'Activo' : 'Deshabilitado'}}
+            </td>
+            <td class="px-6 py-4 text-right">
+              <a (click)="onSelected(hotel)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+            </td>
+          </tr>
+        } @empty {
+          <tr>
+            <td class="px6 py4" colspan="4">No hay hoteles creados</td>
+          </tr>
+
+        }
+      }
       </tbody>
     </table>
   </div>

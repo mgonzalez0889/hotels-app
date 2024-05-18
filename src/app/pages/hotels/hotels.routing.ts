@@ -8,5 +8,9 @@ export default  [
   {
     path: 'create',
     loadComponent: () => import('./form-hotels/form-hotels.component')
+  },
+  {
+    path: 'update/:id',
+    loadComponent: () => import('./form-hotels/form-hotels.component')
   }
 ] as Routes
