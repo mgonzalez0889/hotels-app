@@ -10,7 +10,7 @@ export class AuthService {
   constructor() { }
 
   session() {
-    this._supabaClient.auth.getSession();
+    return this._supabaClient.auth.getSession();
   }
   signUp(credentials: SignUpWithPasswordCredentials) {
     return this._supabaClient.auth.signUp(credentials);
