@@ -19,5 +19,9 @@ export const routes: Routes = [
     component: LayoutComponent,
     canActivate: [privateGuard],
     loadChildren: () => import('./pages/bedrooms/bedrooms.routing')
+  },
+  {
+    path: 'travels',
+    loadChildren: () => import('./pages/travels/traveler.routing')
   }
 ];
