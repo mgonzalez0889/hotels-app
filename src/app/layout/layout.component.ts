@@ -1,5 +1,5 @@
 import {Component, inject} from '@angular/core';
-import {Router, RouterLink, RouterOutlet} from "@angular/router";
+import {Router, RouterLink, RouterLinkActive, RouterOutlet} from "@angular/router";
 import {AuthService} from "../services/auth.service";
 
 @Component({
@@ -7,7 +7,8 @@ import {AuthService} from "../services/auth.service";
   standalone: true,
   imports: [
     RouterOutlet,
-    RouterLink
+    RouterLink,
+    RouterLinkActive
   ],
   templateUrl: './layout.component.html',
   styleUrl: './layout.component.scss'

@@ -1,0 +1,83 @@
+<div class="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 m-auto">
+  <form class="max-w-sm mx-auto" [formGroup]="form">
+    <label class="inline-flex items-center cursor-pointer">
+      <input type="checkbox" value="" class="sr-only peer" checked formControlName="state">
+      <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+      <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">Estado</span>
+    </label>
+    <div class="mb-5">
+      <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Hoteles</label>
+      <select id="countries"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              formControlName="hotel_id"
+      >
+        <option selected>Selecciona un hotel</option>
+        @for(hotel of hotelService.hotels();  track hotel) {
+        <option value="{{hotel.id}}" >{{hotel.name}}</option>
+        }
+      </select>
+    </div>
+    <div class="mb-5">
+      <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Tipo de habitacíon</label>
+      <select id="countries"
+              class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              formControlName="id_type_room"
+      >
+        <option selected>Selecciona tipo de habitación</option>
+        @for(type of roomService.types();  track type) {
+          <option value="{{type.id}}" >{{type.name}}</option>
+        }
+      </select>
+    </div>
+    <div class="mb-5">
+      <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Nombre de la habitación</label>
+      <input type="text" id="base-input"
+             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+             formControlName="name"
+             autocomplete="off"
+      >
+    </div>
+    <div class="mb-5">
+      <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Precio base $</label>
+      <input type="text" id="base-input"
+             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+             formControlName="price_base"
+             autocomplete="off"
+      >
+    </div>
+    <div class="mb-5">
+      <label class="inline-flex items-center cursor-pointer">
+        <input type="checkbox" value="" class="sr-only peer" checked formControlName="available">
+        <div class="relative w-11 h-6 bg-gray-200 peer-focus:outline-none peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600"></div>
+        <span class="ms-3 text-sm font-medium text-gray-900 dark:text-gray-300">¿Disponible?</span>
+      </label>
+    </div>
+    <div class="mb-5">
+      <label for="countries" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Porcentaje de impuesto</label>
+      <select id="countries" class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              formControlName="id_taxe"
+      >
+        <option selected>Seleccione impuesto</option>
+        @for(taxe of taxeService.taxes();  track taxe) {
+        <option value="{{taxe.id}}" >{{taxe.taxes}}</option>
+        }
+      </select>
+    </div>
+    <div class="mb-5">
+      <label for="base-input" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Ubicación</label>
+      <input type="text" id="base-input"
+             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+             formControlName="location"
+             autocomplete="off"
+      >
+    </div>
+    <div class="mb-5">
+      <button type="button"
+              class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium w-full rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+              (click)="onSubmit()"
+      >Guardar</button>
+    </div>
+  </form>
+</div>
+
+

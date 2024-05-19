@@ -13,5 +13,11 @@ export const routes: Routes = [
     component: LayoutComponent,
     canActivate: [privateGuard],
     loadChildren: () => import('./pages/hotels/hotels.routing')
+  },
+  {
+    path: 'bedrooms',
+    component: LayoutComponent,
+    canActivate: [privateGuard],
+    loadChildren: () => import('./pages/bedrooms/bedrooms.routing')
   }
 ];

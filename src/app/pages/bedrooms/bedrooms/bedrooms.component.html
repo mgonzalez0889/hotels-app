@@ -1,0 +1,128 @@
+<div>
+  <div class="flex flex-row justify-between mb-4">
+    <h2 class="font-semibold text-2xl text-blue-950">Hoteles</h2>
+    <button routerLink="/bedrooms/create" class="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-full text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Nueva habitación</button>
+  </div>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          Nombre
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Dirección
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Ciudad
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Contacto
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Estado actual
+        </th>
+        <th scope="col" class="px-6 py-3">
+          <span class="sr-only">Edit</span>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      @if(hotelsService.loading()) {
+      <tr class="bg-whire border-b dark:bg-gray-800 dark:border-gray-700">
+        <td colspan="4" class="px-6 py-4">
+          <p class="text-center">loading...</p>
+        </td>
+      </tr>
+      }
+      @if(!hotelsService.loading() && !hotelsService.error()) {
+      @for(hotel of hotelsService.hotels(); track hotel) {
+      <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+        <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+          {{hotel.name}}
+        </th>
+        <td class="px-6 py-4">
+          {{hotel.address}}
+        </td>
+        <td class="px-6 py-4">
+          {{hotel.city}}
+        </td>
+        <td class="px-6 py-4">
+          {{hotel.contact}}
+        </td>
+        <td class="px-6 py-4">
+          {{hotel.state ? 'Habilitado' : 'Deshabilitado'}}
+        </td>
+        <td class="px-6 py-4 text-right">
+          <a (click)="showRooms(hotel)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">Habitaciones</a>
+        </td>
+      </tr>
+      } @empty {
+      <tr>
+        <td class="px6 py4" colspan="4">No hay hoteles creados</td>
+      </tr>
+
+      }
+      }
+      </tbody>
+    </table>
+  </div>
+</div>
+<hr class="h-px my-8 bg-gray-200 border-0 dark:bg-gray-700">
+<div class="mt-5" *ngIf="roomsService.loading()">
+  <h3 class="font-semibold text-2xl text-blue-950 mb-4">Habitaciones</h3>
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          Nombre habitación
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Precio
+        </th>
+        <th scope="col" class="px-6 py-3">
+          ¿Disponible?
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Ubicación
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Estado actual
+        </th>
+        <th scope="col" class="px-6 py-3">
+          <span class="sr-only">Edit</span>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      @for(room of roomsService.rooms(); track room) {
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{room.name}}
+          </th>
+          <td class="px-6 py-4">
+            {{room.price_base }}
+          </td>
+          <td class="px-6 py-4">
+            {{room.available ? 'Si' : 'No'}}
+          </td>
+          <td class="px-6 py-4">
+            {{room.location}}
+          </td>
+          <td class="px-6 py-4">
+            {{room.state ? 'Habilitada' : 'Deshabilitada'}}
+          </td>
+          <td class="px-6 py-4 text-right">
+            <a (click)="onSelected(room)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">Modificar</a>
+          </td>
+        </tr>
+        } @empty {
+        <tr>
+          <td class="px6 py4" colspan="4">No hay habitaciones creadas</td>
+        </tr>
+       }
+      </tbody>
+    </table>
+  </div>
+</div>

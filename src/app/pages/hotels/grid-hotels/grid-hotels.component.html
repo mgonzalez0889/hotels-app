@@ -59,10 +59,10 @@
               {{hotel.web}}
             </td>
             <td class="px-6 py-4">
-              {{hotel.state ? 'Activo' : 'Deshabilitado'}}
+              {{hotel.state ? 'Habilitado' : 'Deshabilitado'}}
             </td>
             <td class="px-6 py-4 text-right">
-              <a (click)="onSelected(hotel)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline">Editar</a>
+              <a (click)="onSelected(hotel)" class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">Modificar</a>
             </td>
           </tr>
         } @empty {
