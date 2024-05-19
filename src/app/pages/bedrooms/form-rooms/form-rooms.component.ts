@@ -50,7 +50,8 @@ export default class FormRoomsComponent implements AfterViewInit{
       return;
     }
 
-    if (this.roomService.selected()) {
+    if (this.roomService.selected() && this.id != null) {
+      console.log(this.roomService.selected())
       this.roomService.updateRoom(<any>{
         state: this.form.value.state ?? true,
         hotel_id: this.form.value.hotel_id ?? 0,
@@ -63,6 +64,7 @@ export default class FormRoomsComponent implements AfterViewInit{
         id: this.id
       });
     }else {
+      console.log('Es el post')
       this.roomService.postRoom({
         state: this.form.value.state ?? true,
         hotel_id: this.form.value.hotel_id ?? 0,

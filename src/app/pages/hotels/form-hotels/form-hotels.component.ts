@@ -40,7 +40,7 @@ export default class FormHotelsComponent implements OnInit{
       return;
     }
 
-    if (this.hotelService.selected()) {
+    if (this.hotelService.selected() && this.id != null) {
       this.hotelService.updateHotel(<any>{
         name: this.form.value.name ?? '',
         address: this.form.value.address ?? '',

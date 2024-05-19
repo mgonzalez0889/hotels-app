@@ -16,6 +16,13 @@ export class RoomsService {
     error: false
   });
 
+  private _stateRoomsHotels = signal<any>({
+    rooms: [],
+    loading: false,
+    error: false
+    }
+  )
+
   public selected = signal({});
 
   private _typeRoomsState = signal<any>({
@@ -30,6 +37,9 @@ export class RoomsService {
   rooms = computed(() => this._state().rooms)
   loading = computed(() => this._state().loading)
   error = computed(() => this._state().error)
+
+  roomsAndHotels = computed(() => this._stateRoomsHotels().rooms)
+  roomsAndHotelsLoading = computed(() => this._stateRoomsHotels().loading)
   constructor() { }
 
   async getAllRooms(id: string) {
@@ -118,6 +128,36 @@ export class RoomsService {
 
     }catch (error) {
 
+    }
+  }
+
+  async getAll() {
+    try {
+      this._stateRoomsHotels.update((state) => ({
+        ...state,
+        loading: true
+      }))
+      const {data} = await this._supabase
+        .from('hotels')
+        .select('id, name, address, city, contact, rooms (id, name, price_base, available)')
+        if (data) {
+          this._stateRoomsHotels.update((state) => ({
+            ...state,
+            rooms: data
+          }))
+        }
+
+    }catch (e) {
+      this._stateRoomsHotels.update((state) => ({
+        ...state,
+        error: true
+      }))
+    }
+    finally {
+      this._stateRoomsHotels.update((state) => ({
+        ...state,
+        loading: false
+      }))
     }
   }
 }
