@@ -25,6 +25,7 @@ export class ReservationService {
 
       await this.postPassengers(customer, customerObject.id);
       await this.postContactEmergency(customer, customerObject.id);
+      await this.postReservation(customer, customerObject.id)
 
     }catch (e) {
 
@@ -56,6 +57,23 @@ export class ReservationService {
         phone: contact.e_phone,
         customer_id: id
       });
+    }catch (error) {
+
+    }
+  }
+
+  private async postReservation(reservation: any, id: number) {
+    try {
+      const {data} = await this._supabase.from('reservation').insert<any>({
+        hotel_id: reservation.hotel_id,
+        rooml_id: reservation.room_id,
+        check_in: reservation.check_in,
+        check_out: reservation.check_out,
+        customer_id: id,
+        status: reservation.status,
+        price: reservation.price_base
+      })
+
     }catch (error) {
 
     }
