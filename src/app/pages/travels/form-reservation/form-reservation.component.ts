@@ -104,7 +104,6 @@ export default class FormReservationComponent implements OnInit, AfterViewInit{
             localStorage.removeItem('hotel');
             localStorage.removeItem('dataPass');
             this.router.navigateByUrl('/travels');
-            //window.location.href = '/travels';
 
           })
         }, 2000)
