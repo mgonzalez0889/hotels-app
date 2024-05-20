@@ -4,6 +4,7 @@ import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
 import {initFlowbite} from "flowbite";
 import {Router} from "@angular/router";
+import {data} from "autoprefixer";
 
 @Component({
   selector: 'app-traveler',
@@ -41,9 +42,11 @@ export default class TravelerComponent implements OnInit, AfterViewInit{
   }
 
   onSelected(hotel: any, room: any) {
-    this.router.navigateByUrl('/travels/reservation')
-    console.log(hotel)
-    console.log(room)
+    this.router.navigateByUrl('/travels/reservation');
+    delete hotel.rooms;
+    localStorage.setItem('hotel', JSON.stringify(hotel));
+    localStorage.setItem('room', JSON.stringify(room));
+    localStorage.setItem('dataPass', JSON.stringify(this.form.getRawValue()));
   }
 
 

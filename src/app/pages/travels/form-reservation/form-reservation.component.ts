@@ -1,6 +1,6 @@
-import {Component, inject} from '@angular/core';
+import {AfterViewInit, Component, inject} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
-import {JsonPipe} from "@angular/common";
+import {CurrencyPipe, DatePipe, JsonPipe} from "@angular/common";
 import {ReservationService} from "../../../services/reservation.service";
 
 @Component({
@@ -8,14 +8,20 @@ import {ReservationService} from "../../../services/reservation.service";
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    JsonPipe
+    JsonPipe,
+    DatePipe,
+    CurrencyPipe
   ],
   templateUrl: './form-reservation.component.html',
   styleUrl: './form-reservation.component.scss'
 })
-export default class FormReservationComponent {
+
+export default class FormReservationComponent implements AfterViewInit{
   private fb = inject(FormBuilder);
   reservationService = inject(ReservationService);
+  room: any  = '';
+  hotel: any  = '';
+  dataPass: any  = '';
 
   form = this.fb.group({
     name: this.fb.control('', []),
@@ -47,6 +53,16 @@ export default class FormReservationComponent {
     this.reservationService.postCustomers(this.form.value);
 
 
+  }
+
+  ngAfterViewInit(): void {
+    const room = localStorage.getItem('room');
+    const hotel = localStorage.getItem('hotel');
+    const dataPass = localStorage.getItem('dataPass');
+    this.hotel = JSON.parse(hotel || "");
+    this.room = JSON.parse(room || "");
+    this.dataPass = JSON.parse(dataPass || "");
+    console.log(this.dataPass)
   }
 
 }
