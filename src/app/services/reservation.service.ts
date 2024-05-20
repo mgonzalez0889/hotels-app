@@ -23,9 +23,10 @@ export class ReservationService {
 
       const customerObject = data?.reduce((obj, item) => item, {});
 
-      await this.postPassengers(customer, customerObject.id);
-      await this.postContactEmergency(customer, customerObject.id);
-      await this.postReservation(customer, customerObject.id)
+      Promise.all([this.postReservation(customer, customerObject.id), this.postPassengers(customer, customerObject.id), this.postContactEmergency(customer, customerObject.id)])
+      //await
+      //await ;
+      //await ;
 
     }catch (e) {
 
@@ -66,7 +67,7 @@ export class ReservationService {
     try {
       const {data} = await this._supabase.from('reservation').insert<any>({
         hotel_id: reservation.hotel_id,
-        rooml_id: reservation.room_id,
+        room_id: reservation.room_id,
         check_in: reservation.check_in,
         check_out: reservation.check_out,
         customer_id: id,

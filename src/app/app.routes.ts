@@ -5,19 +5,19 @@ import {privateGuard, publicGuard} from "./guards/auth.guard";
 export const routes: Routes = [
   {
     path: 'auth',
-    canActivate: [publicGuard],
+    //canActivate: [publicGuard],
     loadChildren: () => import('./auth/auth.routing')
   },
   {
     path: 'hotels',
     component: LayoutComponent,
-    canActivate: [privateGuard],
+    //canActivate: [privateGuard],
     loadChildren: () => import('./pages/hotels/hotels.routing')
   },
   {
     path: 'bedrooms',
     component: LayoutComponent,
-    canActivate: [privateGuard],
+    //canActivate: [privateGuard],
     loadChildren: () => import('./pages/bedrooms/bedrooms.routing')
   },
   {

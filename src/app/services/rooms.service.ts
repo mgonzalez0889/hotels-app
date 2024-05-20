@@ -16,7 +16,7 @@ export class RoomsService {
     error: false
   });
 
-  private _stateRoomsHotels = signal<any>({
+  public _stateRoomsHotels = signal<any>({
     rooms: [],
     loading: false,
     error: false

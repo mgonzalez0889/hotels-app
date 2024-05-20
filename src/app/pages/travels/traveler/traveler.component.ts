@@ -1,10 +1,9 @@
 import {AfterViewInit, Component, inject, OnInit} from '@angular/core';
 import {RoomsService} from "../../../services/rooms.service";
-import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
+import {FormBuilder, ReactiveFormsModule, Validators} from "@angular/forms";
 import {NgForOf, NgIf} from "@angular/common";
 import {initFlowbite} from "flowbite";
-import {Router} from "@angular/router";
-import {data} from "autoprefixer";
+import {Router, RouterLink} from "@angular/router";
 
 @Component({
   selector: 'app-traveler',
@@ -13,6 +12,7 @@ import {data} from "autoprefixer";
     ReactiveFormsModule,
     NgForOf,
     NgIf,
+    RouterLink,
   ],
   templateUrl: './traveler.component.html',
   styleUrl: './traveler.component.scss'
@@ -23,10 +23,10 @@ export default class TravelerComponent implements OnInit, AfterViewInit{
   private router = inject(Router);
 
   form = this.fb.group({
-    city: this.fb.control([]),
-    check_in: this.fb.control([]),
-    check_out: this.fb.control([]),
-    adults: this.fb.control([]),
+    city: this.fb.control('',[Validators.required]),
+    check_in: this.fb.control('',[Validators.required]),
+    check_out: this.fb.control('',[Validators.required]),
+    adults: this.fb.control('',[Validators.required]),
   })
 
   ngAfterViewInit(): void {
@@ -34,11 +34,18 @@ export default class TravelerComponent implements OnInit, AfterViewInit{
   }
 
   onSearch() {
+    if (this.form.invalid) {
+      return;
+    }
     this.roomsService.getAll();
   }
 
   ngOnInit(): void {
-    initFlowbite()
+    initFlowbite();
+    this.roomsService._stateRoomsHotels.update((state) => ({
+      ...state,
+      rooms: []
+    }))
   }
 
   onSelected(hotel: any, room: any) {
