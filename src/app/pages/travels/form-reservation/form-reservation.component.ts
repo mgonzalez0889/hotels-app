@@ -1,6 +1,7 @@
 import {Component, inject} from '@angular/core';
 import {FormBuilder, ReactiveFormsModule} from "@angular/forms";
 import {JsonPipe} from "@angular/common";
+import {ReservationService} from "../../../services/reservation.service";
 
 @Component({
   selector: 'app-form-reservation',
@@ -14,6 +15,7 @@ import {JsonPipe} from "@angular/common";
 })
 export default class FormReservationComponent {
   private fb = inject(FormBuilder);
+  reservationService = inject(ReservationService);
 
   form = this.fb.group({
     name: this.fb.control('', []),
@@ -40,9 +42,9 @@ export default class FormReservationComponent {
     if (this.form.invalid) {
       return;
     }
-      console.log(this.form.value)
+    console.log(this.form.value)
 
-
+    this.reservationService.postCustomers(this.form.value);
 
 
   }
