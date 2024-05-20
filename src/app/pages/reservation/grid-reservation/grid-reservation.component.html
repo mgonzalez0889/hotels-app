@@ -1,0 +1,77 @@
+<div class="flex flex-row justify-between">
+  <h2 class="text-2xl text-blue-950">Reservas</h2>
+</div>
+<div class="mt-3">
+  <div class="relative overflow-x-auto shadow-md sm:rounded-lg">
+    <table class="w-full text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400">
+      <thead class="text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
+      <tr>
+        <th scope="col" class="px-6 py-3">
+          Nombre de la reserva
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Identificación
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Teléfono de contacto
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Habitación
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Ubicación
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Check-In
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Check-Out
+        </th>
+        <th scope="col" class="px-6 py-3">
+          Estado reserva
+        </th>
+        <th scope="col" class="px-6 py-3">
+          <span class="sr-only">Edit</span>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+        <tr class="bg-white border-b dark:bg-gray-800 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-600" *ngFor="let item of reservationService.reservations()">
+          <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
+            {{item.customers.name}} {{item.customers.lastname}}
+          </th>
+          <td class="px-6 py-4">
+            {{item.customers.identification}}
+          </td>
+          <td class="px-6 py-4">
+            {{item.customers.phone}}
+          </td>
+          <td class="px-6 py-4">
+            {{item.rooms.name}}
+          </td>
+          <td class="px-6 py-4">
+            {{item.rooms.location}}
+          </td>
+          <td class="px-6 py-4">
+            {{item.check_in | date: 'dd/MM/YYYY'}}
+          </td>
+          <td class="px-6 py-4">
+            {{item.check_out | date: 'dd/MM/YYYY'}}
+          </td>
+          <td class="px-6 py-4">
+            {{item.status ? 'Habilitado' : 'Deshabilitado'}}
+          </td>
+          <td class="px-6 py-4 text-right">
+            <button  class="font-medium text-blue-600 dark:text-blue-500 hover:underline cursor-pointer">
+              <svg class="w-[25px] h-[25px] text-gray-800 dark:text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24">
+                <path stroke="currentColor" stroke-width="1.7" d="M21 12c0 1.2-4.03 6-9 6s-9-4.8-9-6c0-1.2 4.03-6 9-6s9 4.8 9 6Z"/>
+                <path stroke="currentColor" stroke-width="1.7" d="M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z"/>
+              </svg>
+            </button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>

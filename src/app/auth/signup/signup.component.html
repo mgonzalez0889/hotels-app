@@ -13,9 +13,11 @@
                    id="email"
                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                    placeholder="Usuario"
-                   required=""
                    formControlName="email"
             >
+            <ng-container *ngIf="(form.controls.email?.dirty || form.controls.email.touched) && form.controls.email.errors?.['required']">
+              <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium"></span>El campo es requerido!</p>
+            </ng-container>
           </div>
           <div>
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Contraseña</label>
@@ -24,13 +26,15 @@
                    id="password"
                    placeholder="••••••••"
                    class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-green-600 focus:border-green-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                   required=""
                    formControlName="password"
             >
+            <ng-container *ngIf="(form.controls.password?.dirty || form.controls.password.touched) && form.controls.password.errors?.['required']">
+              <p class="mt-2 text-sm text-red-600 dark:text-red-500"><span class="font-medium"></span>El campo es requerido!</p>
+            </ng-container>
           </div>
           <button type="submit" class="w-full text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:outline-none focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">Crear una cuenta</button>
           <p class="text-sm font-light text-gray-500 dark:text-gray-400">
-            Ya tienes usuario? <a routerLink="/auth/login" class="font-medium text-green-600 hover:underline dark:text-green-500">Login aquí</a>
+            Ya tienes usuario? <a routerLink="/auth/login" class="font-medium text-green-600 hover:underline dark:text-green-500">Ingresa aquí</a>
           </p>
         </form>
       </div>

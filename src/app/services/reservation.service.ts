@@ -1,4 +1,4 @@
-import {inject, Injectable} from '@angular/core';
+import {computed, inject, Injectable, signal} from '@angular/core';
 import {SupabaseService} from "./supabase.service";
 
 @Injectable({
@@ -6,7 +6,48 @@ import {SupabaseService} from "./supabase.service";
 })
 export class ReservationService {
   private _supabase = inject(SupabaseService).supabaseClient;
+
+  private _state = signal<any>({
+    reservations: [],
+    loading: false,
+    error: false
+  });
+
+  //Selectors
+  reservations = computed(() => this._state().reservations)
+
   constructor() { }
+
+  async getAll() {
+    try {
+      this._state.update((state) =>  ({
+        ...state,
+        loading: true
+      }));
+      const {data} = await this._supabase.from('reservation').select(
+        'id, check_in, check_out, status, customers (id, identification, name, lastname, phone, email),  hotels(id, name), rooms(id, name, location, price_base)'
+      )
+
+      if (data ) {
+        this._state.update((state) => ({
+          ...state,
+          reservations: data
+        }))
+      }
+
+    }catch (error) {
+      this._state.update((state) =>  ({
+        ...state,
+        error: true
+      }));
+    }
+    finally {
+      this._state.update((state) =>  ({
+        ...state,
+        loading: false
+      }));
+    }
+  }
 
   async postCustomers(customer: any) {
     try {
@@ -24,9 +65,6 @@ export class ReservationService {
       const customerObject = data?.reduce((obj, item) => item, {});
 
       Promise.all([this.postReservation(customer, customerObject.id), this.postPassengers(customer, customerObject.id), this.postContactEmergency(customer, customerObject.id)])
-      //await
-      //await ;
-      //await ;
 
     }catch (e) {
 

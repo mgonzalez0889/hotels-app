@@ -4,6 +4,11 @@ import {privateGuard, publicGuard} from "./guards/auth.guard";
 
 export const routes: Routes = [
   {
+    path: '',
+    pathMatch: 'full',
+    redirectTo: 'travels'
+  },
+  {
     path: 'auth',
     //canActivate: [publicGuard],
     loadChildren: () => import('./auth/auth.routing')
@@ -11,14 +16,17 @@ export const routes: Routes = [
   {
     path: 'hotels',
     component: LayoutComponent,
-    //canActivate: [privateGuard],
     loadChildren: () => import('./pages/hotels/hotels.routing')
   },
   {
     path: 'bedrooms',
     component: LayoutComponent,
-    //canActivate: [privateGuard],
     loadChildren: () => import('./pages/bedrooms/bedrooms.routing')
+  },
+  {
+    path: 'reservation',
+    component: LayoutComponent,
+    loadChildren: () => import('./pages/reservation/reservation.routing')
   },
   {
     path: 'travels',
